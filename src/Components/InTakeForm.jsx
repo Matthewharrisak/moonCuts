@@ -46,44 +46,51 @@ function InTakeForm() {
     return(
         <div>
         <h1> This is the intake form </h1>
-            <div>
+            <div className='inTakeForm'>
                 <label> Name </label>
                 <input type='text' 
                  onChange={(e) => dispatch({type: 'addName' , payload: e.target.value})
                 }
                  />
+                 <br/>
                  <label> Pronouns </label>
-
                  <input type='text' 
                  onChange={(e) => dispatch({type: 'addPronouns' , payload: e.target.value})
                 }
                  />
+                 <br/>
                  <label> Email </label>
                  <input type='text' 
                  onChange={(e) => dispatch({type: 'addEmail' , payload: e.target.value})
                 }
                  />
+                 <br/>
                  <label> Phone Number </label>
                  <input type='text' 
                  onChange={(e) => dispatch({type: 'addPhone' , payload: e.target.value})
                 }
                  />
+                 <br/>
                  <label> Hair Goals (change this to a select) </label>
                  <input type='text' 
                  onChange={(e) => dispatch({type: 'addHairGoal' , payload: e.target.value})
                 }
                  />
-                 Do you need special Accomidations?
+                 <br/>
+                 Do you need special accommodations?
+                 <br/>
                  <label> Accesibility requirements </label>
                  <input type='text' 
                  onChange={(e) => dispatch({type: 'addAccessibility' , payload: e.target.value})
                 }
                  />
+                 <br/>
                  <label> Allergies </label>
                  <input type='text' 
                  onChange={(e) => dispatch({type: 'addAllergies' , payload: e.target.value})
                 }
                  />
+                 <br/>
                  <label> Prefered Experience </label>
                  <input type='text' 
                  onChange={(e) => dispatch({type: 'addExperience' , payload: e.target.value})
@@ -92,6 +99,9 @@ function InTakeForm() {
             
             <button onClick={(evt) => handleSubmit(evt)}> submit </button>
             </div>
+            your response:
+           name: {state.name}
+
         </div>
     )
 }
