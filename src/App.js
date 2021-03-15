@@ -1,4 +1,7 @@
 import './App.css'
+import InTakeForm from './Components/InTakeForm'
+
+
 function App() {
   return (
     <div className="App">
@@ -8,6 +11,7 @@ function App() {
         </p>
         
       </header>
+      <InTakeForm/>
     </div>
   );
 }
