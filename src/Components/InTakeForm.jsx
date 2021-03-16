@@ -1,4 +1,6 @@
 import React, {useReducer} from 'react';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 
 const initialArg = {
     name: '',
@@ -44,6 +46,9 @@ function InTakeForm() {
         };
   
     return(
+        <Grid container spacing={6}>
+         <Container fixed>
+
         <div>
         <h1> This is the intake form </h1>
             <div className='inTakeForm'>
@@ -103,6 +108,9 @@ function InTakeForm() {
            name: {state.name}
 
         </div>
+        </Container>
+        </Grid>
+
     )
 }
 
