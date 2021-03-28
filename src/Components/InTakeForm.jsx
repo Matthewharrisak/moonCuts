@@ -1,9 +1,14 @@
 import React, {useReducer} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import {sendEmail}  from './Helpers/Email';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+
 
 const initialArg = {
-    name: '',
+    firstName: '',
+    lastName: '',
     pronouns: '',
     email: '',
     phone: '',
@@ -19,8 +24,10 @@ function InTakeForm() {
 
     function reducer(state, action) {
         switch (action.type) {
-            case 'addName':
-                return {...state, name: action.payload};
+            case 'addFirstName':
+                return {...state, firstName: action.payload};
+            case 'addLastName':
+                return {...state, lastName: action.payload};
             case 'addPronouns':
                 return {...state,  pronouns: action.payload};
             case 'addEmail':
@@ -43,6 +50,7 @@ function InTakeForm() {
         const handleSubmit = (evt) => {
             console.log(state)
             evt.preventDefault();
+            sendEmail(state);
         };
   
     return(
@@ -52,9 +60,15 @@ function InTakeForm() {
         <div>
         <h1> This is the intake form </h1>
             <div className='inTakeForm'>
-                <label> Name </label>
+                <label> First Name </label>
                 <input type='text' 
-                 onChange={(e) => dispatch({type: 'addName' , payload: e.target.value})
+                 onChange={(e) => dispatch({type: 'addFirstName' , payload: e.target.value})
+                }
+                 />
+                 <br/>
+                 <label> Last Name </label>
+                <input type='text' 
+                 onChange={(e) => dispatch({type: 'addLastName' , payload: e.target.value})
                 }
                  />
                  <br/>
@@ -75,15 +89,40 @@ function InTakeForm() {
                  onChange={(e) => dispatch({type: 'addPhone' , payload: e.target.value})
                 }
                  />
+                  <br/>
+                
+                 <label> Hair Goals </label>
+
+                <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    value={state.hairGoal}
+                    onChange={(e) => dispatch({type: 'addHairGoal', payload: e.target.value})}
+                >
+                    <MenuItem value="">
+                    <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={'growth'}>growth</MenuItem>
+                    <MenuItem value={'maintenance'}>maintenance</MenuItem>
+                    <MenuItem value={'transformation'}>transformation</MenuItem>
+                    <MenuItem value={'growth'}>growth</MenuItem>
+
+                    <MenuItem value={'other'}>Other</MenuItem>
+                </Select>
+
+                    {state.hairGoal === 'other' ? <> please explain
+                    <input type='text' onChange={(e) => dispatch({type: 'addHairGoal' , payload: e.target.value})
+                    } /> </> :  null}
+              
+
                  <br/>
-                 <label> Hair Goals (change this to a select) </label>
-                 <input type='text' 
-                 onChange={(e) => dispatch({type: 'addHairGoal' , payload: e.target.value})
-                }
-                 />
                  <br/>
-                 Do you need special accommodations?
                  <br/>
+
+                 <h2>Do you need special accommodations?</h2>
+                 <br/>
+                 <br/>
+
                  <label> Accesibility requirements </label>
                  <input type='text' 
                  onChange={(e) => dispatch({type: 'addAccessibility' , payload: e.target.value})
@@ -104,9 +143,6 @@ function InTakeForm() {
             
             <button onClick={(evt) => handleSubmit(evt)}> submit </button>
             </div>
-            your response:
-           name: {state.name}
-
         </div>
         </Container>
         </Grid>
