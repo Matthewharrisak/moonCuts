@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {useReducer, useState, useEffect} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import {sendEmail}  from './Helpers/Email';
@@ -16,11 +16,18 @@ const initialArg = {
     accessibility: '',
     allergies: '',
     experience:'',
+    preferredContact: '',
 }
 
 function InTakeForm() {
     const [state, dispatch] = useReducer(reducer, initialArg);
+    const [hairIsOther, setHairIsOther] = useState(false)
 
+    useEffect(() =>  {
+        if (state.hairGoal === 'other') {
+            setHairIsOther(true)
+    }
+    })
 
     function reducer(state, action) {
         switch (action.type) {
@@ -34,6 +41,8 @@ function InTakeForm() {
                 return {...state,  email: action.payload};
             case 'addPhone':
                 return {...state, phone: action.payload};
+            case 'preferredContact':
+                return {...state, preferredContact: action.payload}
             case 'addHairGoal':
                 return {...state, hairGoal: action.payload};
             case 'addAccessibility':
@@ -50,7 +59,7 @@ function InTakeForm() {
         const handleSubmit = (evt) => {
             console.log(state)
             evt.preventDefault();
-            sendEmail(state);
+            // sendEmail(state);
         };
   
     return(
@@ -61,43 +70,46 @@ function InTakeForm() {
         <h1> This is the intake form </h1>
             <div className='inTakeForm'>
                 <label> First Name </label>
-                <input type='text' 
+                {/* <input type='text' 
                  onChange={(e) => dispatch({type: 'addFirstName' , payload: e.target.value})
                 }
-                 />
+                 /> */}
                  <br/>
                  <label> Last Name </label>
-                <input type='text' 
+                {/* <input type='text' 
                  onChange={(e) => dispatch({type: 'addLastName' , payload: e.target.value})
                 }
-                 />
+                 /> */}
                  <br/>
                  <label> Pronouns </label>
-                 <input type='text' 
+                 {/* <input type='text' 
                  onChange={(e) => dispatch({type: 'addPronouns' , payload: e.target.value})
                 }
-                 />
+                 /> */}
                  <br/>
                  <label> Email </label>
-                 <input type='text' 
+                 {/* <input type='text' 
                  onChange={(e) => dispatch({type: 'addEmail' , payload: e.target.value})
                 }
-                 />
+                 /> */}
                  <br/>
                  <label> Phone Number </label>
-                 <input type='text' 
+                 {/* <input type='text' 
                  onChange={(e) => dispatch({type: 'addPhone' , payload: e.target.value})
                 }
-                 />
-                  <br/>
-                
-                 <label> Hair Goals </label>
+                 /> */}
+                 preferred contact method? 
+                 {/* <button onClick={(e) => dispatch({type: 'preferredContact' , payload: 'text'})}> text </button>
+                 <button onClick={(e) => dispatch({type: 'preferredContact' , payload: 'call'})}> call </button>
 
-                <Select
+                  <br/> */}
+                 <label> Hair Goals </label>
+                {/* <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
                     value={state.hairGoal}
                     onChange={(e) => dispatch({type: 'addHairGoal', payload: e.target.value})}
+                    // onChange={setHairIsOther((e) => e.target.value)}
                 >
                     <MenuItem value="">
                     <em>None</em>
@@ -105,23 +117,21 @@ function InTakeForm() {
                     <MenuItem value={'growth'}>growth</MenuItem>
                     <MenuItem value={'maintenance'}>maintenance</MenuItem>
                     <MenuItem value={'transformation'}>transformation</MenuItem>
-                    <MenuItem value={'growth'}>growth</MenuItem>
-
                     <MenuItem value={'other'}>Other</MenuItem>
-                </Select>
-
-                    {state.hairGoal === 'other' ? <> please explain
+                     </Select> */}
+                    {/* <br/>
+                    {hairIsOther === true ? <> please explain
                     <input type='text' onChange={(e) => dispatch({type: 'addHairGoal' , payload: e.target.value})
                     } /> </> :  null}
-              
-
-                 <br/>
+               */}
+                    {/* <button onClick={() => console.log('check hair plan:' , state , hairIsOther)}>state check</button> */}
+                 {/* <br/>
                  <br/>
                  <br/>
 
                  <h2>Do you need special accommodations?</h2>
                  <br/>
-                 <br/>
+                 <br/> */}
 
                  <label> Accesibility requirements </label>
                  <input type='text' 
@@ -134,13 +144,13 @@ function InTakeForm() {
                  onChange={(e) => dispatch({type: 'addAllergies' , payload: e.target.value})
                 }
                  />
+                 {/* <br/>
+                 <label> do you prefer a quiet salon experience? </label>
+                 <button
+                 onClick={(e) => dispatch({type: 'addExperience' , payload: "quiet experience please"})}> yes </button>
                  <br/>
-                 <label> Prefered Experience </label>
-                 <input type='text' 
-                 onChange={(e) => dispatch({type: 'addExperience' , payload: e.target.value})
-                }
-                 />
-            
+
+             */}
             <button onClick={(evt) => handleSubmit(evt)}> submit </button>
             </div>
         </div>
