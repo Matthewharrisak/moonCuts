@@ -2,7 +2,7 @@ import React, {useReducer, useState, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import input from '@material-ui/core/input';
+import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
@@ -119,7 +119,7 @@ export default function InTakeForm() {
         {/* <form className={classes.form} noValidate> */}
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <input
+              <TextField
                 // autoComplete="fname"
                 // name="firstName"
                 variant="outlined"
@@ -133,7 +133,7 @@ export default function InTakeForm() {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <input
+              <TextField
                 variant="outlined"
                 required
                 value={state.lastName}
@@ -147,7 +147,7 @@ export default function InTakeForm() {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <input
+              <TextField
                 variant="outlined"
                 fullWidth
                 value={state.pronouns}
@@ -160,7 +160,7 @@ export default function InTakeForm() {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <input
+              <TextField
                 variant="outlined"
                 required
                 value={state.phone}
@@ -200,7 +200,7 @@ export default function InTakeForm() {
               />
             </Grid>
             <Grid item xs={12}>
-              <input
+              <TextField
                 variant="outlined"
                 required
                 fullWidth
@@ -242,7 +242,7 @@ export default function InTakeForm() {
             </Grid>
             <Grid item xs={12}>
             {hairIsOther === true ? <> please explain
-                    <input
+                    <TextField
                      type='text' onChange={(e) => dispatch({type: 'addHairGoal' , payload: e.target.value})
                     } /> </> :  null}
             </Grid>
@@ -254,7 +254,7 @@ export default function InTakeForm() {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <input
+              <TextField
                 autoComplete="addAllergies"
                 name="addAllergies"
                 variant="outlined"
@@ -267,7 +267,7 @@ export default function InTakeForm() {
             }              />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <input
+              <TextField
                 variant="outlined"
                 fullWidth
                 id="addAccessibility"
