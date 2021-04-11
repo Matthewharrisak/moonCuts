@@ -2,7 +2,7 @@ import React, {useReducer, useState, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
+import input from '@material-ui/core/input';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
@@ -41,10 +41,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
+  // form: {
+  //   width: '100%', // Fix IE 11 issue.
+  //   marginTop: theme.spacing(3),
+  // },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
@@ -71,7 +71,7 @@ export default function InTakeForm() {
     if (state.hairGoal === 'other') {
         setHairIsOther(true)
     }
-    })
+    }, [state.hairGoal])
 
     const handleSubmit = (evt) => {
         console.log(state)
@@ -119,11 +119,11 @@ export default function InTakeForm() {
         {/* <form className={classes.form} noValidate> */}
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
+              <input
+                // autoComplete="fname"
+                // name="firstName"
                 variant="outlined"
-                required
+                // required
                 value={state.firstName}
                 fullWidth
                 // id="firstName"
@@ -133,34 +133,34 @@ export default function InTakeForm() {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <input
                 variant="outlined"
                 required
                 value={state.lastName}
                 fullWidth
                 // id="lastName"
                 label="Last Name"
-                name="lastName"
-                autoComplete="lname"
+                // name="lastName"
+                // autoComplete="lname"
                 onChange={(e) => dispatch({type: 'addLastName' , payload: e.target.value})
                 }
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <input
                 variant="outlined"
                 fullWidth
                 value={state.pronouns}
                 // id="Pronouns"
                 label="Pronouns"
-                name="Pronouns"
-                autoComplete="Pronouns"
+                // name="Pronouns"
+                // autoComplete="Pronouns"
                 onChange={(e) => dispatch({type: 'addPronouns' , payload: e.target.value})
                 }
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <input
                 variant="outlined"
                 required
                 value={state.phone}
@@ -174,7 +174,9 @@ export default function InTakeForm() {
               />
             </Grid>
              <Grid item xs={12} sm={4}>
+            <Typography component="h1" variant="h5">
             Prefered  Contact
+            </Typography>
             </Grid>
             {/*
             <Grid item xs={12} sm={4}>
@@ -198,7 +200,7 @@ export default function InTakeForm() {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <input
                 variant="outlined"
                 required
                 fullWidth
@@ -240,7 +242,7 @@ export default function InTakeForm() {
             </Grid>
             <Grid item xs={12}>
             {hairIsOther === true ? <> please explain
-                    <TextField
+                    <input
                      type='text' onChange={(e) => dispatch({type: 'addHairGoal' , payload: e.target.value})
                     } /> </> :  null}
             </Grid>
@@ -252,7 +254,7 @@ export default function InTakeForm() {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <input
                 autoComplete="addAllergies"
                 name="addAllergies"
                 variant="outlined"
@@ -265,7 +267,7 @@ export default function InTakeForm() {
             }              />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <input
                 variant="outlined"
                 fullWidth
                 id="addAccessibility"
@@ -289,20 +291,16 @@ export default function InTakeForm() {
             Submit
           </Button>
 
-          <Grid container justify="flex-end">
+          {/* <Grid container justify="flex-end"> */}
             {/* <Grid item>
               <Link href="#" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid> */}
-          </Grid>
+          {/* </Grid> */}
         {/* </form> */}
       </div>
       <button onClick={() => console.log(state)}> statecheck</button>
-
-      <Box mt={5}>
-        {/* <Copyright /> */}
-      </Box>
     </Container>
   );
 }

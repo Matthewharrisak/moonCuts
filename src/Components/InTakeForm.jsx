@@ -4,6 +4,15 @@ import Container from '@material-ui/core/Container';
 import {sendEmail}  from './Helpers/Email';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 
 const initialArg = {
@@ -19,16 +28,38 @@ const initialArg = {
     preferredContact: '',
 }
 
+const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(3),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
+
 function InTakeForm() {
+    const classes = useStyles();
+
     const [state, dispatch] = useReducer(reducer, initialArg);
     const [hairIsOther, setHairIsOther] = useState(false)
 
     useEffect(() =>  {
         if (state.hairGoal === 'other') {
             setHairIsOther(true)
-    }
-    })
-
+        }
+        }, [state.hairGoal])
+    
     function reducer(state, action) {
         switch (action.type) {
             case 'addFirstName':
@@ -63,51 +94,125 @@ function InTakeForm() {
         };
   
     return(
-        <Grid container spacing={6}>
-         <Container fixed>
+        <Container component="main" maxWidth="xs">
+            <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography display="inline" component="h5" variant="h6">
+        Interested in Booking an Appointment?   
+         </Typography>
+        {/* <form className={classes.form} noValidate> */}
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                // autoComplete="fname"
+                // name="firstName"
+                variant="outlined"
+                // required
+                value={state.firstName}
+                fullWidth
+                // id="firstName"
+                label="First Name"
+                autoFocus
+                onChange={(e) => dispatch({type: 'addFirstName' , payload: e.target.value})}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                value={state.lastName}
+                fullWidth
+                // id="lastName"
+                label="Last Name"
+                // name="lastName"
+                // autoComplete="lname"
+                onChange={(e) => dispatch({type: 'addLastName' , payload: e.target.value})
+                }
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                fullWidth
+                value={state.pronouns}
+                // id="Pronouns"
+                label="Pronouns"
+                // name="Pronouns"
+                // autoComplete="Pronouns"
+                onChange={(e) => dispatch({type: 'addPronouns' , payload: e.target.value})
+                }
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                value={state.phone}
+                fullWidth
+                // id="PhoneNumber"
+                label="Phone Number"
+                name="PhoneNumber"
+                autoComplete="lname"
+                onChange={(e) => dispatch({type: 'addPhone' , payload: e.target.value})
+                }
+              />
+            </Grid>
+             <Grid item xs={12} sm={4}>
+            <Typography display="block" component="h1" variant="subtitle2">
+            Prefered  Contact
+            </Typography>
+            </Grid>
+            {/*
+            <Grid item xs={12} sm={4}>
+                <button onClick={(e) => dispatch({type: 'preferredContact' , payload: 'call'})}> call </button>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+                <button onClick={(e) => dispatch({type: 'preferredContact' , payload: 'call'})}> call </button>
+            </Grid> */}
+            <Grid item xs={12} sm={4}>
+              <FormControlLabel
+                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                label="Text"
+                onClick={(e) => dispatch({type: 'preferredContact' , payload: 'call'})}
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <FormControlLabel
+                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                label="call."
+                onClick={(e) => dispatch({type: 'preferredContact' , payload: 'call'})}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                value={state.email}
+                // id="email"
+                label="Email Address"
+                // name="email"
+                // autoComplete="email"
+                onChange={(e) => dispatch({type: 'addEmail' , payload: e.target.value})
+                }
+              />
+            </Grid>
 
-        <div>
-        <h1> This is the intake form </h1>
-            <div className='inTakeForm'>
-                <label> First Name </label>
-                {/* <input type='text' 
-                 onChange={(e) => dispatch({type: 'addFirstName' , payload: e.target.value})
-                }
-                 /> */}
-                 <br/>
-                 <label> Last Name </label>
-                {/* <input type='text' 
-                 onChange={(e) => dispatch({type: 'addLastName' , payload: e.target.value})
-                }
-                 /> */}
-                 <br/>
-                 <label> Pronouns </label>
-                 {/* <input type='text' 
-                 onChange={(e) => dispatch({type: 'addPronouns' , payload: e.target.value})
-                }
-                 /> */}
-                 <br/>
-                 <label> Email </label>
-                 {/* <input type='text' 
-                 onChange={(e) => dispatch({type: 'addEmail' , payload: e.target.value})
-                }
-                 /> */}
-                 <br/>
-                 <label> Phone Number </label>
-                 {/* <input type='text' 
-                 onChange={(e) => dispatch({type: 'addPhone' , payload: e.target.value})
-                }
-                 /> */}
-                 preferred contact method? 
-                 {/* <button onClick={(e) => dispatch({type: 'preferredContact' , payload: 'text'})}> text </button>
-                 <button onClick={(e) => dispatch({type: 'preferredContact' , payload: 'call'})}> call </button>
 
-                  <br/> */}
-                 <label> Hair Goals </label>
-                {/* <Select
+            <Grid item xs={6}>
+              Hair Goals
+            </Grid>
+            <Grid item xs={6}>
+              <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
                     value={state.hairGoal}
+                    fullWidth
+                    label="Phone Number"
+
+                    InputLabel='Hair Goals'                  
                     onChange={(e) => dispatch({type: 'addHairGoal', payload: e.target.value})}
                     // onChange={setHairIsOther((e) => e.target.value)}
                 >
@@ -118,45 +223,72 @@ function InTakeForm() {
                     <MenuItem value={'maintenance'}>maintenance</MenuItem>
                     <MenuItem value={'transformation'}>transformation</MenuItem>
                     <MenuItem value={'other'}>Other</MenuItem>
-                     </Select> */}
-                    {/* <br/>
-                    {hairIsOther === true ? <> please explain
-                    <input type='text' onChange={(e) => dispatch({type: 'addHairGoal' , payload: e.target.value})
+                     </Select>
+                   
+            </Grid>
+            <Grid item xs={12}>
+            {hairIsOther === true ? <> please explain
+                    <TextField
+                     type='text' onChange={(e) => dispatch({type: 'addHairGoal' , payload: e.target.value})
                     } /> </> :  null}
-               */}
-                    {/* <button onClick={() => console.log('check hair plan:' , state , hairIsOther)}>state check</button> */}
-                 {/* <br/>
-                 <br/>
-                 <br/>
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                label="quiet salon experience?"
+                onClick={(e) => dispatch({type: 'addExperience' , payload: "quiet experience please"})}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="addAllergies"
+                name="addAllergies"
+                variant="outlined"
+                value={state.allergies}
+                fullWidth
+                id="addAllergies"
+                label="Allergies?"
+                autoFocus
+                onChange={(e) => dispatch({type: 'addAllergies' , payload: e.target.value})
+            }              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                fullWidth
+                id="addAccessibility"
+                label="Accessibility Request"
+                name="addAccessibility"
+                value={state.accessibility}
+                autoComplete="addAccessibility"
+                onChange={(e) => dispatch({type: 'addAccessibility' , payload: e.target.value})
+               }
+              />
+            </Grid>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={(evt) => handleSubmit(evt)}
+          >
+            Submit
+          </Button>
 
-                 <h2>Do you need special accommodations?</h2>
-                 <br/>
-                 <br/> */}
-
-                 <label> Accesibility requirements </label>
-                 <input type='text' 
-                 onChange={(e) => dispatch({type: 'addAccessibility' , payload: e.target.value})
-                }
-                 />
-                 <br/>
-                 <label> Allergies </label>
-                 <input type='text' 
-                 onChange={(e) => dispatch({type: 'addAllergies' , payload: e.target.value})
-                }
-                 />
-                 {/* <br/>
-                 <label> do you prefer a quiet salon experience? </label>
-                 <button
-                 onClick={(e) => dispatch({type: 'addExperience' , payload: "quiet experience please"})}> yes </button>
-                 <br/>
-
-             */}
-            <button onClick={(evt) => handleSubmit(evt)}> submit </button>
-            </div>
-        </div>
+          {/* <Grid container justify="flex-end"> */}
+            {/* <Grid item>
+              <Link href="#" variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid> */}
+          {/* </Grid> */}
+        {/* </form> */}
+      </div>
+      <button onClick={() => console.log(state)}> statecheck</button>
+   
         </Container>
-        </Grid>
-
     )
 }
 

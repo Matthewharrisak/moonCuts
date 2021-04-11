@@ -5,8 +5,8 @@ import StyledForm from './Components/StyledForm'
 function App() {
   return (
     <div className="App">
-      {/* <InTakeForm/> */}
-      <StyledForm/>
+      <InTakeForm/>
+      {/* <StyledForm/> */}
     </div>
   );
 }
