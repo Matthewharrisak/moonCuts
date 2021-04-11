@@ -1,17 +1,19 @@
 import React, {useReducer, useState, useEffect} from 'react';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
+// import Grid from '@material-ui/core/Grid';
+// import Container from '@material-ui/core/Container';
 import {sendEmail}  from './Helpers/Email';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+// import Select from '@material-ui/core/Select';
+// import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+// import Typography from '@material-ui/core/Typography';
+// import Avatar from '@material-ui/core/Avatar';
+// import Button from '@material-ui/core/Button';
+// import TextField from '@material-ui/core/TextField';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import {Checkbox,TextField, FormControlLabel, Button, Avatar }from '@material-ui/core/Checkbox';
+import {Checkbox,TextField, FormControlLabel, Button, Avatar, Typography, 
+   MenuItem,Container, Grid, Select }from '@material-ui/core';
+
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 
@@ -102,17 +104,12 @@ function InTakeForm() {
         <Typography display="inline" component="h5" variant="h6">
         Interested in Booking an Appointment?   
          </Typography>
-        {/* <form className={classes.form} noValidate> */}
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                // autoComplete="fname"
-                // name="firstName"
                 variant="outlined"
-                // required
                 value={state.firstName}
                 fullWidth
-                // id="firstName"
                 label="First Name"
                 autoFocus
                 onChange={(e) => dispatch({type: 'addFirstName' , payload: e.target.value})}
@@ -124,10 +121,7 @@ function InTakeForm() {
                 required
                 value={state.lastName}
                 fullWidth
-                // id="lastName"
                 label="Last Name"
-                // name="lastName"
-                // autoComplete="lname"
                 onChange={(e) => dispatch({type: 'addLastName' , payload: e.target.value})
                 }
               />
@@ -137,10 +131,7 @@ function InTakeForm() {
                 variant="outlined"
                 fullWidth
                 value={state.pronouns}
-                // id="Pronouns"
                 label="Pronouns"
-                // name="Pronouns"
-                // autoComplete="Pronouns"
                 onChange={(e) => dispatch({type: 'addPronouns' , payload: e.target.value})
                 }
               />
@@ -151,7 +142,6 @@ function InTakeForm() {
                 required
                 value={state.phone}
                 fullWidth
-                // id="PhoneNumber"
                 label="Phone Number"
                 name="PhoneNumber"
                 autoComplete="lname"
@@ -164,13 +154,6 @@ function InTakeForm() {
             Prefered  Contact
             </Typography>
             </Grid>
-            {/*
-            <Grid item xs={12} sm={4}>
-                <button onClick={(e) => dispatch({type: 'preferredContact' , payload: 'call'})}> call </button>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-                <button onClick={(e) => dispatch({type: 'preferredContact' , payload: 'call'})}> call </button>
-            </Grid> */}
             <Grid item xs={12} sm={4}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
@@ -191,10 +174,7 @@ function InTakeForm() {
                 required
                 fullWidth
                 value={state.email}
-                // id="email"
                 label="Email Address"
-                // name="email"
-                // autoComplete="email"
                 onChange={(e) => dispatch({type: 'addEmail' , payload: e.target.value})
                 }
               />
@@ -210,11 +190,10 @@ function InTakeForm() {
                     id="demo-simple-select-helper"
                     value={state.hairGoal}
                     fullWidth
-                    label="Phone Number"
+                    label="Hair Goals"
 
-                    InputLabel='Hair Goals'                  
+                    // InputLabel='Hair Goals'                  
                     onChange={(e) => dispatch({type: 'addHairGoal', payload: e.target.value})}
-                    // onChange={setHairIsOther((e) => e.target.value)}
                 >
                     <MenuItem value="">
                     <em>None</em>
@@ -250,7 +229,7 @@ function InTakeForm() {
                 label="Allergies?"
                 autoFocus
                 onChange={(e) => dispatch({type: 'addAllergies' , payload: e.target.value})
-            }              />
+            }/>
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -276,15 +255,6 @@ function InTakeForm() {
           >
             Submit
           </Button>
-
-          {/* <Grid container justify="flex-end"> */}
-            {/* <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid> */}
-          {/* </Grid> */}
-        {/* </form> */}
       </div>
       <button onClick={() => console.log(state)}> statecheck</button>
    
